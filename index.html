@@ -217,6 +217,44 @@
   }
   .hero-scroll .line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite}
 
+  /* ============ FULLSCREEN IMAGE SECTIONS (Dolly Air style) ============ */
+  .img-section{position:relative;height:600px;overflow:hidden;background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center}
+  .img-section .img-overlay{position:absolute;inset:0;background:rgba(3,21,72,.45)}
+  .img-section .img-content{position:relative;z-index:2;max-width:700px}
+  .img-section .img-content h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,3.5vw,3rem);
+    color:#fff;text-transform:uppercase;letter-spacing:.04em;
+    margin-bottom:16px;position:relative;
+    opacity:0;transform:translateY(-40px);
+    transition:all .6s cubic-bezier(.16,1,.3,1);
+  }
+  .img-section .img-content p{
+    font-size:1.1rem;color:rgba(255,255,255,.9);line-height:1.8;
+    max-width:550px;
+    opacity:0;transform:translateY(30px);
+    transition:all .6s .15s cubic-bezier(.16,1,.3,1);
+  }
+  .img-section.visible .img-content h2,
+  .img-section.visible .img-content p{opacity:1;transform:translateY(0)}
+
+  .img-section.intro-section{background-image:url(images/dolly/intro.jpg)}
+  .img-section.intro-section .img-content{text-align:left;padding-left:clamp(20px,8vw,120px)}
+  .img-section.cargo-section{background-image:url(images/dolly/industry.jpg)}
+  .img-section.cargo-section .img-content{text-align:center;margin:0 auto}
+  .img-section.cargo-section .img-content h2{font-size:clamp(2.2rem,4vw,3.4rem)}
+  .img-section.cargo-section .img-content p{max-width:650px;margin:0 auto}
+  .img-section.global-section{background-image:url(images/dolly/brand.jpg)}
+  .img-section.global-section .img-content{text-align:right;padding-right:clamp(20px,8vw,120px);margin-left:auto}
+  .img-section.global-section .img-content p{max-width:550px;margin-left:auto}
+
+  @media screen and (max-width:768px){
+    .img-section{height:420px}
+    .img-section .img-content{padding:0 20px !important;text-align:center !important;margin:0 auto !important}
+    .img-section .img-content h2{font-size:1.6rem !important}
+    .img-section .img-content p{font-size:.95rem;max-width:100% !important}
+  }
+
   /* ============ SECTION HEADERS ============ */
   section{padding:120px 0;position:relative}
   .section-head{margin-bottom:80px;max-width:780px}
@@ -698,6 +736,43 @@
     <div class="line"></div>
   </div>
 </section>
+
+<!-- FULLSCREEN IMAGE SECTIONS — Dolly Air style -->
+<!-- Intro: Air Freight Forwarding -->
+<div class="img-section intro-section reveal">
+  <div class="img-overlay"></div>
+  <div class="img-content">
+    <h2><span class="en-only">Air Freight Forwarding</span><span class="zh-only">空运货运代理</span></h2>
+    <p>
+      <span class="en-only">True-Way Logistics is a professional air freight brand. Relying on years of experience, advanced technology and management in air freight, we have been recognized and trusted by customers worldwide.</span>
+      <span class="zh-only">楚纬国际物流是一家专业的空运品牌。凭借多年的空运经验、先进的技术和管理，我们赢得了全球客户的认可与信赖。</span>
+    </p>
+  </div>
+</div>
+
+<!-- Cargo: Supply Chain -->
+<div class="img-section cargo-section reveal">
+  <div class="img-overlay"></div>
+  <div class="img-content">
+    <h2><span class="en-only">Air Cargo Supply Chain</span><span class="zh-only">空运供应链管理</span></h2>
+    <p>
+      <span class="en-only">Worldwide air freight and air cargo supply chain management — providing various solutions, capacity and competitiveness for your products in the air supply chain.</span>
+      <span class="zh-only">全球空运及航空货运供应链管理 — 为您的产品在航空供应链中提供多样化的解决方案、运力与竞争力。</span>
+    </p>
+  </div>
+</div>
+
+<!-- Global: Our Promise -->
+<div class="img-section global-section reveal">
+  <div class="img-overlay"></div>
+  <div class="img-content">
+    <h2><span class="en-only">Do All for Your Air Cargo</span><span class="zh-only">全心服务您的空运</span></h2>
+    <p>
+      <span class="en-only">We rely on our own and industry advantages to provide comprehensive air supply chain management services. We do all for your air cargo — from origin to destination, door to door.</span>
+      <span class="zh-only">依托自身及行业优势，我们提供全面的航空供应链管理服务。从起运地到目的地，门到门，我们全心全意服务您的每一件空运货物。</span>
+    </p>
+  </div>
+</div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
@@ -1473,6 +1548,7 @@
     entries.forEach(e=>{
       if(e.isIntersecting){
         e.target.classList.add('in');
+        e.target.classList.add('visible');
         io.unobserve(e.target);
       }
     });
